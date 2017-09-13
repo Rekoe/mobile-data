@@ -15,14 +15,19 @@
           <span class="title">本周拆机数</span>
         </div>
       </div>
-      <div class="chart-content"></div>
+      <div class="chart-content">
+        <echarts-pile class="chart"></echarts-pile>
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text-ecmascript-6">
+import EchartsPile from 'components/echarts-pile/echarts-pile'
 export default {
-  
+  components: {
+    EchartsPile
+  }
 }
 </script>
 
@@ -55,5 +60,13 @@ export default {
           .num
             line-height 50px
             font-size $font-size-large-x
+    .chart-content
+      width 100%
+      height 220px
+      border 1px solid #000
+      margin-top 15px
+      .chart
+        width 100%
+        height 100%
 </style>
 
