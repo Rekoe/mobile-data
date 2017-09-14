@@ -12,8 +12,10 @@
 import WeekTab from 'components/week-tabs/week-tabs'
 import Split from 'base/split/split'
 import WeekData from 'components/week-data/week-data'
+import axios from 'axios'
+// import qs from 'qs'
 export default {
-  data () {
+  data() {
     return {
       currentIndex: 1,
       weekList: [
@@ -41,9 +43,28 @@ export default {
       ]
     }
   },
+  created() {
+    this._getWeek()
+  },
   methods: {
     switchItem(index) {
       this.currentIndex = index
+    },
+    _getWeek() {
+      // axios.post('/api/bocc/services/TyyhService/business?wsdl').then((res) => {
+      //   console.log(res)
+      // })
+      axios({
+        method: 'POST',
+        url: '/api/bocc/services/TyyhService/business?wsdl',
+        params: {
+          'statisticsType': '1',
+          'reportName': '1',
+          'startTime': '2017-09-10',
+          'endTime': '2017-09-14',
+          'tokenid': ''
+        }
+      })
     }
   },
   components: {
