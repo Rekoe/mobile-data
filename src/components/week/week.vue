@@ -56,13 +56,12 @@ export default {
       // })
       axios({
         method: 'POST',
-        url: '/api/bocc/services/TyyhService/business?wsdl',
+        url: '/api/figure',
         params: {
-          'statisticsType': '1',
-          'reportName': '1',
-          'startTime': '2017-09-10',
-          'endTime': '2017-09-14',
-          'tokenid': ''
+          statisticsType: '4',
+          reportName: '1',
+          startTime: '2017/08/10',
+          endTime: '2017/08/24'
         }
       })
     }

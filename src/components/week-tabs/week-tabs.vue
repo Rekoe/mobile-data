@@ -21,6 +21,10 @@ export default {
     currentIndex: {
       type: Number,
       default: 1
+    },
+    loop: {
+      type: Boolean,
+      default: true
     }
   },
   mounted () {
@@ -35,7 +39,8 @@ export default {
     // 计算 item 的容器宽度
     _calculateWidth() {
       let w = document.body.clientWidth
-      this.$refs.tabContent.style.width = ((document.getElementsByClassName('week-item').length - 1) * w * 0.25) + w * 0.5 + 'px'
+      let listLen = document.getElementsByClassName('week-item').length
+      this.$refs.tabContent.style.width = ((listLen - 1) * w * 0.25) + w * 0.5 + 'px'
       // console.log(document.body.clientWidth + 'px')
     }
   },
@@ -56,6 +61,14 @@ export default {
       width 100%
       height 100%
       overflow hidden
+      position relative
+      &:after
+        content ''
+        position absolute
+        width 50%
+        left  25%
+        bottom 1px
+        border-bottom 2px solid $color-theme
       .tab-content
         display flex
         height 100%
@@ -69,5 +82,4 @@ export default {
           flex 2
           height 43px
           color $color-theme
-          border-bottom 2px solid $color-theme
 </style>
