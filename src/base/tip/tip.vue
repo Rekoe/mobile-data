@@ -1,6 +1,6 @@
 <template>
   <div class="tip">
-    <p class="tip-text" v-show="showFlag">{{text}}</p>
+    <p class="tip-text" v-show="showFlag" ref="tipText">{{text}}</p>
   </div>
 </template>
 
@@ -22,8 +22,8 @@
         this.showFlag = true
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
-          
-        })
+          this.showFlag = false
+        }, 2000)
       }
     }
   }
@@ -35,11 +35,13 @@
     text-align center
     .tip-text
       position fixed
-      top 35%
-      left 40%
+      top 29%
+      left 50%
+      margin-left -75px
+      width 150px
       height 40px
       line-height 40px
-      padding 6px 12px
+      padding 3px 6px
       color #ffffff
       background-color rgba(0, 0, 0, 0.8)
       border-radius 5px
