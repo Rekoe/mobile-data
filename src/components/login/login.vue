@@ -8,7 +8,7 @@
         </div>
         <div class="password-input">
           <input type="num" placeholder="请输入验证码" v-model="verifyCode">
-          <a href="javascript:;" class="pwd-btn" @click="checkVerifyCode">获取验证码</a>
+          <a href="javascript:;" class="pwd-btn" @click="checkVerifyCode">{{verifyCodeText}}</a>
         </div>
         <div class="login-btn" @click="login">登&nbsp;录</div>
       </form>
@@ -25,13 +25,13 @@ export default {
     return {
       phoneNum: '',
       verifyCode: '',
-      text: ''
+      text: '',
+      verifyCodeText: '获取验证码'
     }
   },
   methods: {
     checkVerifyCode() {
       if (this.phoneNum === '') {
-        
       } else {
         let data = {'phoneNum': this.phoneNum}
         // 请求接口
