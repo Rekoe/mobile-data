@@ -8,7 +8,7 @@
         </div>
         <div class="password-input">
           <input type="number" placeholder="请输入验证码" v-model="verifyCode">
-          <a href="javascript:;" class="pwd-btn" @click="checkVerifyCode">{{verifyCodeText}}</a>
+          <a href="javascript:;" class="pwd-btn" @click="btnFlag && testClick()">{{verifyCodeText}}</a>
         </div>
         <div class="login-btn" @click="login">登&nbsp;录</div>
       </form>
@@ -33,7 +33,8 @@ export default {
       phoneNum: '',
       verifyCode: '',
       text: '',
-      time: 0
+      time: 0,
+      btnFlag: true
     }
   },
   computed: {
@@ -51,7 +52,6 @@ export default {
         // 请求接口
         axios.post('/api/sendSms', data).then((res) => {
           if (!res.data.success) {
-            this._startTimer(10)
             this.$refs.tip.show()
             this.text = '该手机尚未开通业务'
           } else {
@@ -86,11 +86,21 @@ export default {
         })
       }
     },
-    _startTimer(time) {
-      this.time = time
-      this.time = setInterval(() => {
-        this.time--
-      }, 1000)
+    _startTimer() {
+      this.time--
+      if (this.time > 0) {
+        this.btnFlag = false
+        console.log(this.time)
+      } else {
+        clearInterval(this.timer)
+        this.btnFlag = true
+        this.time = 0
+      }
+    },
+    testClick() {
+      this.time = 10
+      this.btnFlag = false
+      this.timer = setInterval(this._startTimer, 1000)
     }
   },
   components: {

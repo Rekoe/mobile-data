@@ -12,7 +12,7 @@
 import WeekTab from 'components/week-tabs/week-tabs'
 import Split from 'base/split/split'
 import WeekData from 'components/week-data/week-data'
-import axios from 'axios'
+// import axios from 'axios'
 // import qs from 'qs'
 export default {
   data() {
@@ -54,16 +54,16 @@ export default {
       // axios.post('/api/bocc/services/TyyhService/business?wsdl').then((res) => {
       //   console.log(res)
       // })
-      axios({
-        method: 'POST',
-        url: '/api/figure',
-        params: {
-          statisticsType: '4',
-          reportName: '1',
-          startTime: '2017/08/10',
-          endTime: '2017/08/24'
-        }
-      })
+      // axios({
+      //   method: 'POST',
+      //   url: '/api/figure',
+      //   params: {
+      //     statisticsType: '4',
+      //     reportName: '1',
+      //     startTime: '2017/08/10',
+      //     endTime: '2017/08/24'
+      //   }
+      // })
     }
   },
   components: {
