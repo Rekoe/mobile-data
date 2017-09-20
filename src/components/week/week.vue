@@ -4,7 +4,7 @@
     <split></split>
     <week-data></week-data>
     <split></split>
-    <router-view></router-view>
+    <city-tabs :activeIndex="activeIndex" :title="title" :cityTabList="cityTabList" @switchTab="switchTab"></city-tabs>
   </div>
 </template>
 
@@ -12,6 +12,7 @@
 import WeekTab from 'components/data-tabs/data-tabs'
 import Split from 'base/split/split'
 import WeekData from 'components/week-data/week-data'
+import CityTabs from 'base/city-tabs/city-tabs'
 // import axios from 'axios'
 // import qs from 'qs'
 export default {
@@ -40,6 +41,13 @@ export default {
         {
           name: '36周 '
         }
+      ],
+      activeIndex: 0,
+      title: '天翼云呼每周业务数据',
+      cityTabList: [
+        {name: '每周新增数'},
+        {name: '每周净增数'},
+        {name: '每周拆机数'}
       ]
     }
   },
@@ -49,6 +57,9 @@ export default {
   methods: {
     switchItem(index) {
       this.currentIndex = index
+    },
+    switchTab(index) {
+      this.activeIndex = index
     },
     _getWeek() {
       // axios.post('/api/bocc/services/TyyhService/business?wsdl').then((res) => {
@@ -69,7 +80,8 @@ export default {
   components: {
     WeekTab,
     Split,
-    WeekData
+    WeekData,
+    CityTabs
   }
 }
 </script>

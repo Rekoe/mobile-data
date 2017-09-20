@@ -21,10 +21,6 @@ export default {
     currentIndex: {
       type: Number,
       default: 1
-    },
-    loop: {
-      type: Boolean,
-      default: true
     }
   },
   mounted () {
