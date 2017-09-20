@@ -2,7 +2,7 @@
   <div class="tab" ref="tab">
     <scroll class="tab-wrapper">
       <ul class="tab-content" ref="tabContent">
-        <li @click="switchItem(index)" v-for="(item, index) in weekList" class="week-item" :class="{'active': currentIndex === index}" ref="weekItem">
+        <li @click="switchItem(index)" v-for="(item, index) in dataList" class="week-item" :class="{'active': currentIndex === index}" ref="weekItem">
           <span>{{item.name}}</span>
         </li>
       </ul>
@@ -14,7 +14,7 @@
 import Scroll from 'base/scroll/scroll'
 export default {
   props: {
-    weekList: {
+    dataList: {
       type: Array,
       default: []
     },
@@ -68,18 +68,15 @@ export default {
         width 50%
         left  25%
         bottom 1px
-        border-bottom 2px solid $color-theme
       .tab-content
         display flex
         height 100%
         .week-item
           flex 1
-          width 110px
-          float left
           text-align center
           font-size $font-size-medium
         .active
-          flex 2
           height 43px
           color $color-theme
+          border-bottom 2px solid $color-theme
 </style>

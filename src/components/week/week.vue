@@ -1,6 +1,6 @@
 <template>
   <div class="week">
-    <week-tab @switch="switchItem" :currentIndex="currentIndex" :weekList="weekList"></week-tab>
+    <week-tab @switch="switchItem" :currentIndex="currentIndex" :dataList="dataList"></week-tab>
     <split></split>
     <week-data></week-data>
     <split></split>
@@ -9,7 +9,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import WeekTab from 'components/week-tabs/week-tabs'
+import WeekTab from 'components/data-tabs/data-tabs'
 import Split from 'base/split/split'
 import WeekData from 'components/week-data/week-data'
 // import axios from 'axios'
@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       currentIndex: 1,
-      weekList: [
+      dataList: [
         {
           name: '30周 '
         },
