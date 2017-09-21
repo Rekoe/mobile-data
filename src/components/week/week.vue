@@ -13,6 +13,7 @@ import WeekTab from 'components/data-tabs/data-tabs'
 import Split from 'base/split/split'
 import WeekData from 'components/week-data/week-data'
 import CityTabs from 'base/city-tabs/city-tabs'
+import { getWeeks } from 'common/js/formatDate'
 // import axios from 'axios'
 // import qs from 'qs'
 export default {
@@ -45,14 +46,15 @@ export default {
       activeIndex: 0,
       title: '天翼云呼每周业务数据',
       cityTabList: [
-        {name: '每周新增数'},
-        {name: '每周净增数'},
-        {name: '每周拆机数'}
+        { name: '每周新增数' },
+        { name: '每周净增数' },
+        { name: '每周拆机数' }
       ]
     }
   },
   created() {
     this._getWeek()
+    getWeeks(2017)
   },
   methods: {
     switchItem(index) {
