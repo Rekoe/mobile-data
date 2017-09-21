@@ -3,7 +3,7 @@
     <scroll class="tab-wrapper">
       <ul class="tab-content" ref="tabContent">
         <li @click="switchItem(index)" v-for="(item, index) in dataList" class="week-item" :class="{'active': currentIndex === index}" ref="weekItem">
-          <span>{{item.name}}</span>
+          <span>{{item}}</span><b>{{unit}}</b>
         </li>
       </ul>
     </scroll>
@@ -21,6 +21,10 @@ export default {
     currentIndex: {
       type: Number,
       default: 1
+    },
+    unit: {
+      type: String,
+      default: ''
     }
   },
   mounted () {

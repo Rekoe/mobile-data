@@ -1,6 +1,6 @@
 <template>
   <div class="week">
-    <week-tab @switch="switchItem" :currentIndex="currentIndex" :dataList="dataList"></week-tab>
+    <week-tab :unit="unit" @switch="switchItem" :currentIndex="currentIndex" :dataList="dataList"></week-tab>
     <split></split>
     <week-data></week-data>
     <split></split>
@@ -13,36 +13,15 @@ import WeekTab from 'components/data-tabs/data-tabs'
 import Split from 'base/split/split'
 import WeekData from 'components/week-data/week-data'
 import CityTabs from 'base/city-tabs/city-tabs'
-import { getWeeks } from 'common/js/formatDate'
+import {getWeeksList} from 'common/js/format'
 // import axios from 'axios'
 // import qs from 'qs'
 export default {
   data() {
     return {
       currentIndex: 1,
-      dataList: [
-        {
-          name: '30周 '
-        },
-        {
-          name: '31周'
-        },
-        {
-          name: '32周 '
-        },
-        {
-          name: '33周 '
-        },
-        {
-          name: '34周 '
-        },
-        {
-          name: '35周 '
-        },
-        {
-          name: '36周 '
-        }
-      ],
+      dataList: [],
+      unit: '周',
       activeIndex: 0,
       title: '天翼云呼每周业务数据',
       cityTabList: [
@@ -54,7 +33,6 @@ export default {
   },
   created() {
     this._getWeek()
-    getWeeks(2017)
   },
   methods: {
     switchItem(index) {
@@ -64,19 +42,11 @@ export default {
       this.activeIndex = index
     },
     _getWeek() {
-      // axios.post('/api/bocc/services/TyyhService/business?wsdl').then((res) => {
-      //   console.log(res)
-      // })
-      // axios({
-      //   method: 'POST',
-      //   url: '/api/figure',
-      //   params: {
-      //     statisticsType: '4',
-      //     reportName: '1',
-      //     startTime: '2017/08/10',
-      //     endTime: '2017/08/24'
-      //   }
-      // })
+      let date = new Date()
+      let year = date.getFullYear()
+      // console.log(year)
+      this.dataList = getWeeksList(year)
+      // console.log(this.dataList)
     }
   },
   components: {

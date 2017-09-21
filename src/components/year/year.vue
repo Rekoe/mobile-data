@@ -1,6 +1,6 @@
 <template>
   <div class="year">
-    <week-tab @switch="switchItem" :currentIndex="currentIndex" :dataList="dataList"></week-tab>
+    <week-tab @switch="switchItem" :unit="unit" :currentIndex="currentIndex" :dataList="dataList"></week-tab>
     <split></split>
     <week-data></week-data>
     <split></split>
@@ -17,11 +17,8 @@ export default {
   data () {
     return {
       currentIndex: 1,
-      dataList: [
-        {name: '2016'},
-        {name: '2017'},
-        {name: '2018'}
-      ],
+      unit: '年',
+      dataList: [2016, 2017, 2018],
       title: '天翼云呼年度业务数据',
       activeIndex: 0,
       cityTabList: [
