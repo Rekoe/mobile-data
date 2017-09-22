@@ -3,15 +3,15 @@
     <div class="data-wrapper">
       <div class="total-content">
         <div class="data-item item-color-y">
-          <span class="num">366</span>
+          <span class="num">{{weekNewly}}</span>
           <span class="title">本周新增数</span>
         </div>
         <div class="data-item item-color-b">
-          <span class="num">234</span>
+          <span class="num">{{weekIncrease}}</span>
           <span class="title">本周净增数</span>
         </div>
         <div class="data-item item-color-d">
-          <span class="num">366</span>
+          <span class="num">{{weekSubtract}}</span>
           <span class="title">本周拆机数</span>
         </div>
       </div>
@@ -25,6 +25,20 @@
 <script type="text-ecmascript-6">
 import EchartsPile from 'components/echarts-pile/echarts-pile'
 export default {
+  props: {
+    weekNewly: {
+      type: Number,
+      default: ''
+    },
+    weekIncrease: {
+      type: Number,
+      default: ''
+    },
+    weekSubtract: {
+      type: Number,
+      default: ''
+    }
+  },
   components: {
     EchartsPile
   }
