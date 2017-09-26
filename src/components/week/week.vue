@@ -6,9 +6,7 @@
     <split></split>
     <city-tabs :activeIndex="activeIndex" :title="title" :cityTabList="cityTabList" @switchTab="switchTab"></city-tabs>
     <div class="echart-wrapper">
-      <div class="echarts">
-        <div id="bar" class="bar"></div>
-      </div>
+      <echarts-bar></echarts-bar>
     </div>
   </div>
 </template>
@@ -21,11 +19,12 @@ import CityTabs from 'base/city-tabs/city-tabs'
 import { getWeeksList } from 'common/js/format'
 import echarts from 'echarts'
 import axios from 'axios'
-// import EchartsBar from 'components/echarts-bar/echarts-bar'
+import EchartsBar from 'components/echarts-bar/echarts-bar'
 // import qs from 'qs'
 
-const nodeDataList = []
-const nodeNameList = ['广州', '深圳', '东莞', '佛山', '中山', '惠州', '珠海', '江门', '汕头', '汕尾', '揭阳', '潮州', '云浮', '湛江', '阳江', '茂名', '清远', '韶关', '梅州', '河源', '肇庆'].reverse()
+const NEW_DATA_LIST = []
+const NEW_INCREASE_LIST = []
+const NEW_SUBTRACT_LIST = []
 export default {
   data() {
     return {
@@ -41,49 +40,11 @@ export default {
       ],
       weekNewly: 0,
       weekIncrease: 0,
-      weekSubtract: 0,
-      options: {
-        color: ['#3398DB'],
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-          }
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
-        xAxis: [
-          {
-            type: 'value',
-            data: nodeDataList
-          }
-        ],
-        yAxis: [
-          {
-            type: 'category',
-            data: nodeNameList
-          }
-        ],
-        series: [
-          {
-            type: 'bar',
-            barWidth: '20%',
-            data: nodeDataList
-          }
-        ]
-      }
+      weekSubtract: 0
     }
   },
   created() {
     this._getWeek()
-  },
-  mounted() {
-    let myChart = echarts.init(document.getElementById('bar'))
-    myChart.setOption(this.options)
   },
   methods: {
     switchItem(index) {
@@ -91,6 +52,33 @@ export default {
     },
     switchTab(index) {
       this.activeIndex = index
+      // 切换柱状图图标数据
+      let myChart = echarts.init(document.getElementById('bar'))
+      if (this.activeIndex === 0) {
+        myChart.setOption({
+          series: [
+            {
+              data: NEW_DATA_LIST
+            }
+          ]
+        })
+      } else if (this.activeIndex === 1) {
+        myChart.setOption({
+          series: [
+            {
+              data: NEW_INCREASE_LIST
+            }
+          ]
+        })
+      } else {
+        myChart.setOption({
+          series: [
+            {
+              data: NEW_SUBTRACT_LIST
+            }
+          ]
+        })
+      }
     },
     _getWeek() {
       let date = new Date()
@@ -100,12 +88,12 @@ export default {
       // console.log(this.dataList)
       axios.get('http://192.168.1.71:8080/static/test.json').then((res) => {
         let resDataList = res.data.data
-        let myChart = echarts.init(document.getElementById('bar'))
         this._getResDataList(resDataList)
+        let myChart = echarts.init(document.getElementById('bar'))
         myChart.setOption({
           series: [
             {
-              data: nodeDataList.reverse()
+              data: NEW_DATA_LIST
             }
           ]
         })
@@ -151,10 +139,15 @@ export default {
         this.weekNewly += sumNewly
         this.weekIncrease += sumIncrease
         this.weekSubtract += sumSubtract
-        nodeDataList.push(sumNewly)
+        NEW_DATA_LIST.push(sumNewly)
+        NEW_INCREASE_LIST.push(sumIncrease)
+        NEW_SUBTRACT_LIST.push(sumSubtract)
       }
-      console.log(nodeDataList.length)
-      console.log(nodeNameList.length)
+      NEW_DATA_LIST.reverse()
+      NEW_INCREASE_LIST.reverse()
+      NEW_SUBTRACT_LIST.reverse()
+      // console.log(nodeDataList.length)
+      // console.log(nodeNameList.length)
       // console.log(resDataList.length)
     }
   },
@@ -162,7 +155,8 @@ export default {
     WeekTab,
     Split,
     WeekData,
-    CityTabs
+    CityTabs,
+    EchartsBar
   }
 }
 </script>
