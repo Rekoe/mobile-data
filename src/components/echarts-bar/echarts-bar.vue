@@ -39,7 +39,7 @@ export default {
         series: [
           {
             type: 'bar',
-            barWidth: '20%',
+            barWidth: '50%',
             data: []
           }
         ]
@@ -57,7 +57,7 @@ export default {
 <style lang="stylus" scoped>
   .echarts
     width 100%
-    height 500px
+    height 600px
     .bar
       width 100%
       height 100%

@@ -18,7 +18,10 @@ export default new Router({
     },
     {
       path: '/week',
-      component: week
+      component: week,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/month',
