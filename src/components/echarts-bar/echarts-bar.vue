@@ -40,7 +40,15 @@ export default {
           {
             type: 'bar',
             barWidth: '50%',
-            data: []
+            data: [],
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true,
+                  position: 'right'
+                }
+              }
+            }
           }
         ]
       }
